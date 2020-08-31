@@ -1,5 +1,7 @@
-h1 REMOVE PRODUCT
-form(method="POST", action="/user/remove")
-    label(name="nameToRemove") name to remove
-    input(type="text" name="nameToRemove")
-    button create
+extends ./layouts/common.pug
+block content
+    h1 REMOVE PRODUCT
+    form(method="POST", action="/user/remove")
+        label(name="nameToRemove") name to remove
+        input(type="text" name="nameToRemove")
+        button create

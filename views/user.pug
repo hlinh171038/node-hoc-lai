@@ -1,11 +1,15 @@
-h1 User List
-form(action='/user/search' method="GET")
-    input(type='text',name='q')
-    input(type='text', name='age')
-    button Search product
-ul
-each val in user
-    li
-     span=val.name
-     span &nbsp
-     a(href='/user/'+val.id) Delete  
+extends ./layouts/common.pug
+block content
+    h1 User List
+    form(action='/user/search' method="GET")
+        input(type='text',name='q')
+        input(type='text', name='age')
+        button Search product
+    ul
+    each val in user
+        li
+            span=val.name
+            span &nbsp
+                a(href='/user/delete/'+val.id) Delete 
+            span &nbsp
+                a(href='/user/'+val.id) View
