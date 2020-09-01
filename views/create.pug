@@ -1,7 +1,16 @@
 extends ./layouts/common.pug
 block content
-    h1 CREATE PAGE
-    form(method="POST", action="/user/create")
-        label(name="name") name
-        input(type="text" name="name")
-        button create
+    h1.d-flex.justify-content-center.align-items-center CREATE PAGE
+    .d-flex.justify-content-center.align-items-center.flex-wrap
+        if error
+            each err in error
+                alert.alert-danger.m-3.w-50.pl-5.p-3=err
+    .d-flex.justify-content-center.align-items-center
+       form(method="POST", action="/user/create")
+            .form-group
+                label(for='exampleInputEmail1') Name
+                    input#exampleInputEmail1.form-control(type='text',name='name',width="100%",value= value ? value.name:"")
+            .form-group
+                label(for='exampleInputPassword1') Phone
+                    input#exampleInputPassword1.form-control(type='text',name='phone',value= value ? value.phone:"")
+            button.btn.btn-primary(type='submit') Create User

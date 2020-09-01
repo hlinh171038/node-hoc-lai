@@ -3,14 +3,14 @@ var shortid = require('shortid');
 
 module.exports.index = function(req,res){
     res.render('user',{
-        user:db.get("users").value()
-    })
+        user:db.get("users").value()    
+    });
 };
 
 //search user
 module.exports.search = function(req, res){
     var q = req.query.q;
-    var age = req.query.age;
+     var age = req.query.age;
     // console.log(req.query);
 
     var matchSearch = db.get("users").filter(function(user){
@@ -27,10 +27,32 @@ module.exports.getCreate = function(req,res){
 };
 module.exports.postCreate = function(req,res){
     req.body.id = shortid.generate();
-    db.get("users")
+    var value = req.body;
+    var error = [];
+    if(req.body.name ==="" )
+    {
+        error.push('Name is require !!!');
+    }
+    if(req.body.phone ==="")
+    {
+        error.push('Phone is require !!!');
+    }
+    if(error.length)
+    {
+        res.render('create',
+            {
+                error:error,
+                value:value
+            }
+        );
+    }
+    else{
+        db.get("users")
     .push(req.body)
     .write();
     res.redirect('/user');
+    }
+    
 };
 
 //update user

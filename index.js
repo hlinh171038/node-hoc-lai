@@ -4,6 +4,9 @@ var app = express();
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+//satic file
+app.use(express.static('public'));
+
 //require low db
 var db = require('./db.js');
 
