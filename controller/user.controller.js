@@ -27,32 +27,11 @@ module.exports.getCreate = function(req,res){
 };
 module.exports.postCreate = function(req,res){
     req.body.id = shortid.generate();
-    var value = req.body;
-    var error = [];
-    if(req.body.name ==="" )
-    {
-        error.push('Name is require !!!');
-    }
-    if(req.body.phone ==="")
-    {
-        error.push('Phone is require !!!');
-    }
-    if(error.length)
-    {
-        res.render('create',
-            {
-                error:error,
-                value:value
-            }
-        );
-    }
-    else{
-        db.get("users")
-    .push(req.body)
-    .write();
+    db.get("users")
+      .push(req.body)
+      .write();
+    console.log(res.locals);
     res.redirect('/user');
-    }
-    
 };
 
 //update user

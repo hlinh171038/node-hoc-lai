@@ -4,13 +4,14 @@ var router = express.Router();
 
 var db = require('../db.js');
 var userController = require('../controller/user.controller');
+var userValidate = require('../validate/user.validate');
 
 router.get('/', userController.index );
 //search user
 router.get('/search',userController.search);
 //create user
 router.get('/create',userController.getCreate);
-router.post('/create',userController.postCreate);
+router.post('/create',userValidate.postCreate,userController.postCreate);
 //update user
 router.get('/update',userController.getUpdate);
 router.post('/update',userController.postUpdate);
