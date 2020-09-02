@@ -27,6 +27,7 @@ module.exports.getCreate = function(req,res){
 };
 module.exports.postCreate = function(req,res){
     req.body.id = shortid.generate();
+    console.log(req.cookies);
     db.get("users")
       .push(req.body)
       .write();

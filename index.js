@@ -1,9 +1,11 @@
 var express = require('express');
 var app = express();
+var cookieParser = require('cookie-parser')
 // cai req.body
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
+// cai cookie
+app.use(cookieParser())
 //satic file
 app.use(express.static('public'));
 
