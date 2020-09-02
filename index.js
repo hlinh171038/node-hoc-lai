@@ -12,6 +12,9 @@ app.use(express.static('public'));
 //require low db
 var db = require('./db.js');
 
+//require md5 hash
+var md5 = require('md5');
+
 //require routes
 var userRoute = require('./routes/user-router');
 var authRoute = require('./routes/auth-route');
