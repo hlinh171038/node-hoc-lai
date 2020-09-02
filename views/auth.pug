@@ -1,0 +1,16 @@
+extends ./layouts/common.pug
+block content
+    h1.d-flex.justify-content-center.align-items-center LOGIN
+    .d-flex.justify-content-center.align-items-center.flex-wrap
+        if error
+            each err in error
+                alert.alert-danger.m-3.w-50.pl-5.p-3=err
+    .d-flex.justify-content-center.align-items-center
+       form(method="POST")
+            .form-group
+                label(for='exampleInputEmail1') Email
+                    input#exampleInputEmail1.form-control(type='text',name='email',width="100%", value = value ?value.email:"")
+            .form-group
+                label(for='exampleInputPassword1') Password
+                    input#exampleInputPassword1.form-control(type='password',name='password', value = value?value.password:"")
+            button.btn.btn-primary(type='submit') Login

@@ -14,6 +14,7 @@ var db = require('./db.js');
 
 //require routes
 var userRoute = require('./routes/user-router');
+var authRoute = require('./routes/auth-route');
 
 var port = 3000;
 app.set('view engine', 'pug');
@@ -24,6 +25,7 @@ app.get('/', function(req,res){
 })
 
 app.use('/user', userRoute);
+app.use('/auth', authRoute);
 app.listen(port, ()=>{
     console.log("This is my port"+port);
 })
