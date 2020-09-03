@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser')
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 // cai cookie
-app.use(cookieParser())
+app.use(cookieParser('linhthai'))
 //satic file
 app.use(express.static('public'));
 
@@ -19,6 +19,9 @@ var md5 = require('md5');
 var userRoute = require('./routes/user-router');
 var authRoute = require('./routes/auth-route');
 
+//require middleware
+var authMiddleware = require('./middleware/auth.middleware');
+
 var port = 3000;
 app.set('view engine', 'pug');
 app.set('views', './views')
@@ -27,7 +30,7 @@ app.get('/', function(req,res){
  res.send('hello word');
 })
 
-app.use('/user', userRoute);
+app.use('/user',authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
 app.listen(port, ()=>{
     console.log("This is my port"+port);

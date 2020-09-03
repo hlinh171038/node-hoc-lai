@@ -30,6 +30,8 @@ module.exports.postAuth = function(req,res,next){
         }); 
         return;
     }
-    res.cookie("cookiesId",user.id);
+    res.cookie("cookiesId",user.id,{
+        signed:true,
+    });
     res.redirect('/user');
 }

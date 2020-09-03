@@ -5,9 +5,8 @@ var router = express.Router();
 var db = require('../db.js');
 var userController = require('../controller/user.controller');
 var userValidate = require('../validate/user.validate');
-var authMiddleware = require('../middleware/auth.middleware');
 
-router.get('/',authMiddleware.requireAuth, userController.index );
+router.get('/', userController.index );
 router.get('/cokie',function(req,res,next){
     res.cookie('cokies-id',"1232");
     res.send('hello');
