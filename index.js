@@ -1,3 +1,6 @@
+require('dotenv').config()
+console.log(process.env.SESSION_ID);
+
 var express = require('express');
 var app = express();
 var cookieParser = require('cookie-parser')
@@ -5,7 +8,7 @@ var cookieParser = require('cookie-parser')
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 // cai cookie
-app.use(cookieParser('linhthai'))
+app.use(cookieParser('process.env.SESSION_ID'))
 //satic file
 app.use(express.static('public'));
 
