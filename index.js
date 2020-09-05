@@ -21,6 +21,7 @@ var md5 = require('md5');
 //require routes
 var userRoute = require('./routes/user-router');
 var authRoute = require('./routes/auth-route');
+var productRoute = require('./routes/product-route');
 
 //require middleware
 var authMiddleware = require('./middleware/auth.middleware');
@@ -35,6 +36,7 @@ app.get('/', function(req,res){
 
 app.use('/user',authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
+app.use('/product',authMiddleware.requireAuth,productRoute)
 app.listen(port, ()=>{
     console.log("This is my port"+port);
 })

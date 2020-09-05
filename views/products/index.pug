@@ -1,0 +1,19 @@
+extends ../layouts/common
+block content
+    .d-flex.w-100.flex-wrap
+        each pro in product
+            .card(style='width: 18rem;',class="m-3")
+                img.card-img-top(src=pro.image)
+                .card-body
+                    h5.card-title
+                        p=pro.name
+                    p.card-text=pro.description
+                    a.btn.btn-primary(href='#') Add product
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="/product/?page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="/product/?page=2">2</a></li>
+        <li class="page-item"><a class="page-link" href="/product/?page=3">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+        
