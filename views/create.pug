@@ -6,11 +6,20 @@ block content
             each err in error
                 alert.alert-danger.m-3.w-50.pl-5.p-3=err
     .d-flex.justify-content-center.align-items-center
-       form(method="POST", action="/user/create")
+       form(method="POST", action="/user/create",enctype="multipart/form-data")
             .form-group
                 label(for='exampleInputEmail1') Name
                     input#exampleInputEmail1.form-control(type='text',name='name',width="100%",value= value ? value.name:"")
             .form-group
                 label(for='exampleInputPassword1') Phone
                     input#exampleInputPassword1.form-control(type='text',name='phone',value= value ? value.phone:"")
+            .form-group
+                label(for='avatar') Avatar
+                    input#avatar.form-control-file(type='file',name='avatar')
+            .form-group
+                label(for='email') Email
+                    input#email.form-control(type='text',name='email')
+            .form-group
+                label(for='password') Password
+                    input#password.form-control(type='password',name='password')
             button.btn.btn-primary(type='submit') Create User

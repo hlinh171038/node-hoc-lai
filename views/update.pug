@@ -1,9 +1,31 @@
 extends ./layouts/common.pug
 block content
     h1 UPDATE PRODUCT
-    form(method="POST", action="/user/update")
-        label(name="name") name to find
-        input(type="text" name="nameToFind")
-        label(name="name") name to change
-        input(type="text" name="nameToChange")
-        button update product
+    .d-flex.justify-content-center.align-items-center.flex-wrap
+        if(error)
+            each err in error
+                alert.alert-danger.m-3.w-50.pl-5.p-3=err        
+    form(method="POST", action="/user/update/"+user.id)
+        .form-group
+            label(for="name") Default Name
+            input#name.form-control(type="text" name="DefaultName",value=user.name)
+        .form-group    
+            label(for="name") Name to change
+            input#name.form-control(type="text" name="nameToChange")
+        .form-group
+            label(for="phone") Default Phone
+            input#phone.form-control(type="text" name="DefaultPhone",value=user.phone)
+        .form-group    
+            label(for="phone") Phone to change
+            input#phone.form-control(type="text" name="phoneToChange")
+        .form-group
+            label(for="password") Type Default Password
+            input#password.form-control(type="text" name="DefaultPassword")
+        .form-group    
+            label(for="password") Password to change
+            input#password.form-control(type="text" name="passwordToChange")
+        .form-group
+            label(for="avatar") Avatar
+            input#avatar.form-control-file(type="file" name="avatarToChange")
+        
+        button update User

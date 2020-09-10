@@ -1,5 +1,6 @@
 var db = require('../db');
 var shortid = require('shortid');
+var md5 = require('md5');
 
 module.exports.index = function(req,res){
     console.log(res.locals);
@@ -28,7 +29,8 @@ module.exports.getCreate = function(req,res){
 };
 module.exports.postCreate = function(req,res){
     req.body.id = shortid.generate();
-    console.log(req.cookies);
+    req.body.file = req.file.path.split('\\').slice(1).join('/') ;
+    req.body.password =md5(req.body.password);
     db.get("users")
       .push(req.body)
       .write();
@@ -37,18 +39,61 @@ module.exports.postCreate = function(req,res){
 };
 
 //update user
-module.exports.getUpdate = function(req,res){
-    res.render('update');
-};
-module.exports.postUpdate = function(req,res){
-    var nameToFind=req.body.nameToFind;
-    db.get('users')
-   .find({ name: nameToFind })
-   .assign({ name: req.body.nameToChange})
-   .write();
-   res.redirect('/user');
- };
 
+module.exports.getUpdate = function(req,res){
+    var id = req.params.id;
+   var user= db.get('users')
+        .find({id:id})
+        .value();
+    res.render('update',{
+        user:user
+    })
+//     var nameToFind=req.body.nameToFind;
+//     db.get('users')
+//             .find({ name: nameToFind })
+//             .assign({ name: req.body.nameToChange})
+//             .write();
+//    res.redirect('/user');
+ };
+module.exports.postUpdate = function(req,res){
+    var id = req.params.id;
+    var user = db.get('users')
+                .find({id:id})
+                .value();
+    var defaultName = req.body.DefaultName;
+    var changeName = req.body.nameToChange;
+    var defaultPhone = req.body.DefaultPhone;
+    var changePhone = req.body.phoneToChange;
+    var defaultPassword = req.body.DefaultPassword;
+    var changePassword = md5(req.body.passwordToChange);
+    var defaultAvatar = user.file;
+    var changeAvatar = req.body.avatarToChange;//?
+    var hashPassword = md5(defaultPassword);
+    var error =[];
+    if(hashPassword !== user.password){
+        error.push('wrong password !!!')
+    }
+    if(changeName ==="")
+    {
+        error.push('type name to change !!!')
+    }
+    if(changePhone ==="")
+    {
+        error.push('type phone to change !!!')
+    }
+    if(error.length){
+        res.render('update',{
+            error:error
+        });
+        return;
+    }
+    
+    db.get('users')
+            .find({ name: defaultName ,phone:defaultPhone, password:hashPassword})
+            .assign({ name:changeName, phone:changePhone, password:changePassword})
+            .write();
+   res.redirect('/user');
+}
  //delete user
  module.exports.delete = function(req,res){
     var id = req.params.id;

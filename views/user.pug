@@ -9,16 +9,22 @@ block content
     
     table.table
         tr 
+            th Avatar
             th Name
             th Phone
             th Delete
             th View
+            th Update
         each val in user
             tr
+                td
+                    img.rounded-circle(src=val.file, width="32",height="32")
                 td=val.name
                 td=val.phone
                 td
                     a.btn-light.p-2.text-decoration-none.rounded(href='/user/delete/'+val.id) Delete
                 td
                     a.btn-light.p-2.text-decoration-none.rounded(href='/user/'+val.id) View
+                td 
+                    a.btn-light.p-2.text-decoration-none.rounded(href='/user/update/'+val.id) Update
                                 

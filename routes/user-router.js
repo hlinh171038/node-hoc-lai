@@ -1,6 +1,11 @@
 var express = require('express');
+// multi data
+var multer  = require('multer');
+
 const shortid = require('shortid');
 var router = express.Router();
+
+var upload = multer({ dest: './public/uploads/' });
 
 var db = require('../db.js');
 var userController = require('../controller/user.controller');
@@ -15,10 +20,11 @@ router.get('/cokie',function(req,res,next){
 router.get('/search',userController.search);
 //create user
 router.get('/create',userController.getCreate);
-router.post('/create',userValidate.postCreate,userController.postCreate);
+router.post('/create',upload.single('avatar'),userValidate.postCreate,userController.postCreate);
 //update user
-router.get('/update',userController.getUpdate);
-router.post('/update',userController.postUpdate);
+router.post('/update/:id',userController.postUpdate);
+router.get('/update/:id',userController.getUpdate);
+
 //delete user
 router.get('/delete/:id',userController.delete);
 // view detail user

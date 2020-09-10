@@ -9,6 +9,10 @@ module.exports.postCreate = function(req,res,next){
     {
         error.push('Phone is require !!!');
     }
+    if(req.file.path ==="")
+    {
+        req.file.path = "uploads/1298352ff3059f6c04528cec1c19e241";
+    }
     if(error.length)
     {
         res.render('create',

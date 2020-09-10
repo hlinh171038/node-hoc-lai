@@ -1,0 +1,12 @@
+extends ../layouts/common
+block content
+    .d-flex.justify-content-center.align-items-center.flex-wrap
+        h1.ml-5
+            span=product.name
+        .container
+            .row
+                .col-md-6
+                    img.border.border-prymary.rounded(src=product.image,width="100%")
+                .col-md-6
+                    p=product.description
+                

@@ -8,7 +8,8 @@ block content
                     h5.card-title
                         p=pro.name
                     p.card-text=pro.description
-                    a.btn.btn-primary(href='#') Add product
+                    a.btn.btn-primary(href='/cart/add/'+pro.id) Add product
+                    a.btn.btn-primary.ml-3(href='/product/'+pro.id) View Detail
     <ul class="pagination">
         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
         <li class="page-item"><a class="page-link" href="/product/?page=1">1</a></li>

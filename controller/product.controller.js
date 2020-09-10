@@ -7,4 +7,17 @@ module.exports.index = function(req, res, next){
     var product = db.get('products').value().slice(start,end);
     res.render('products/index',
     {product:product});
+};
+
+// view detail product
+module.exports.ViewDetail = function(req,res,next){
+    var productId = req.params.productId;
+    var product = db.get('products')
+                    .find({id:productId})
+                    .value();
+        console.log(product)
+    res.render('products/detail',
+    {
+        product:product
+    })
 }
